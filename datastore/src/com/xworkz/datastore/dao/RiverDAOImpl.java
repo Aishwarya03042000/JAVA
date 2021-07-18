@@ -1,0 +1,52 @@
+package com.xworkz.datastore.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.xworkz.datastore.dto.RiverDTO;
+
+public class RiverDAOImpl implements RiverDAO {
+
+	private List<RiverDTO> list = new ArrayList<RiverDTO>();
+
+	@Override
+	public boolean save(RiverDTO dto) {
+		boolean added = list.add(dto);
+		System.out.println("DTO: " + dto);
+		System.out.println("DTO was added: " + added);
+		return added;
+	}
+
+	@Override
+	public int totalItems() {
+		int total = list.size();
+		return total;
+	}
+
+	@Override
+	public void update(RiverDTO dto) {
+		boolean exist = this.list.contains(dto);
+		if (exist) {
+			System.out.println("River found, it will update: " + dto);
+			int indexOfRiver = this.list.indexOf(dto);
+			this.list.set(indexOfRiver, dto);
+		} else {
+			System.out.println("River not found");
+		}
+
+	}
+
+	@Override
+	public boolean delete(RiverDTO dto) {
+		if (this.list.contains(dto)) {
+			{
+				this.list.contains(dto);
+				System.out.println("Removed: " + dto);
+			}
+			System.out.println("River not exist, cannot be removed");
+			return false;
+		}
+		return false;
+	}
+
+}
